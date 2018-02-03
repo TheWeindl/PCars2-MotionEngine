@@ -1,0 +1,8 @@
+
+# VisualStudio Files
+*.suo
+*.db
+*.log
+*.tlog
+*.obj
+*.pdb
