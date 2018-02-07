@@ -1,5 +1,6 @@
 // Used for memory-mapped functionality
 #include <windows.h>
+#include <iostream>
 #include "sharedmemory.h"
 
 // Used for this example
@@ -65,16 +66,9 @@ int main()
 			continue;
 		}
 
+		std::cout << "Size of data structure: " << sizeof(*sharedData) << std::endl;
+
 		printf( "Sequence number increase %d, current index %d, previous index %d\n", indexChange, localCopy->mSequenceNumber, updateIndex );
-
-		const bool isValidParticipantIndex = localCopy->mViewedParticipantIndex != -1 && localCopy->mViewedParticipantIndex < localCopy->mNumParticipants && localCopy->mViewedParticipantIndex < STORED_PARTICIPANTS_MAX;
-		if ( isValidParticipantIndex )
-		{
-			const ParticipantInfo& viewedParticipantInfo = localCopy->mParticipantInfo[sharedData->mViewedParticipantIndex];
-			printf( "mParticipantName: (%s)\n", viewedParticipantInfo.mName );
-			printf( "lap Distance = %f \n", viewedParticipantInfo.mCurrentLapDistance );
-		}
-
 		printf( "mGameState: (%d)\n", localCopy->mGameState );
 		printf( "mSessionState: (%d)\n", localCopy->mSessionState );
 		printf( "mOdometerKM: (%0.2f)\n", localCopy->mOdometerKM );
